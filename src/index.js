@@ -19,7 +19,7 @@ const ConnectApp = async () => {
     try {
         const client = await MongoClient.connect(
             "mongodb+srv://project-user:deathwing00@todos-buwxe.mongodb.net/test?retryWrites=true&w=majority",
-            { useNewUrlParser: true }
+            { useNewUrlParser: true , useUnifiedTopology: true}
         )
         console.log('Got client.')
 
