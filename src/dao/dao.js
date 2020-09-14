@@ -20,5 +20,12 @@ module.exports = {
                 err ? reject(err) : resolve(data.toArray());
             })
         })
+    ),
+    addRecord: (user, stats) => (
+        newPromise((resolve, reject) => {
+            Strength.insertOne({googleId: user, stats: stats}), (err, data) => {
+                err ? reject(err) : resolve(data)
+            }
+        })
     )
 }
