@@ -25,14 +25,15 @@ module.exports = {
             let { k, b, m } = stats;
             if(!k || !b || !m) {
                 res.status(400).json({success: false})
-            } else {
-                const addRecordResult = await StrengthDao.addRecord(user, stats)
-                if(!addRecordResult.insertedId){
-                    res.status(500).json({success: false, msg: "Something went wrong.."})
-                } else {
-                    res.status(201).json({success: true})
-                }
+                return
             }
+            const addRecordResult = await StrengthDao.addRecord(user, stats)
+            console.log(addRecordResult)
+            if(!addRecordResult.insertedId){
+                res.status(500).json({success: false, msg: "Something went wrong.."})
+                return
+            }
+            res.status(201).json({success: true})
         } catch (err) {
             console.log(err)
             res.status(500).json({msg: "Something went wrong.."})
