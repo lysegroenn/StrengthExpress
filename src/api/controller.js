@@ -20,16 +20,16 @@ module.exports = {
     },
     addRecord: async (req, res) => {
         try {
-            let user = "test";    //let user = req.user.googleId;
-            let { stats } = req.body;
+            //let user = req.user.googleId;
+            let { stats, user } = req.body;
             let { k, b, m } = stats;
-            if(!k || !b || !m) {
+            if(!stats || !user) {
                 res.status(400).json({success: false})
                 return
             }
             const addRecordResult = await StrengthDao.addRecord(user, stats)
-            console.log(addRecordResult)
-            if(!addRecordResult.insertedId){
+            console.log(addRecordResult.result.n)
+            if(addRecordResult.result.n != 1){
                 res.status(500).json({success: false, msg: "Something went wrong.."})
                 return
             }
