@@ -1,6 +1,7 @@
 const express = require('express');
 const { MongoClient } = require('mongodb');
 const morgan = require('morgan');
+const cors = require('cors');
 const routes = require('./api/routes');
 const dao = require('./dao/dao');
 
@@ -22,7 +23,8 @@ const ConnectApp = async () => {
             { useNewUrlParser: true , useUnifiedTopology: true}
         )
         console.log('Got client.')
-
+        
+        app.use(cors())
         app.use(routes)
 
         //inject DB
